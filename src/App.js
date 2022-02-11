@@ -1,12 +1,13 @@
 import './App.css';
-import DogList from './Components/DogList/DogList';
+import MainComponent from './Components/MainComponent/MainComponent';
+
 
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello Dogs</h1>
-      <DogList />
+      <h1>Find your favourite Dogs</h1>
+      <MainComponent/>
     </div>
   );
 }
