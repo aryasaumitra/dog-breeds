@@ -1,0 +1,10 @@
+.dog-card{
+    /* border: solid red 2px; */
+    margin: auto;
+}
+
+.image{
+    border-radius: 50%;
+    max-width: 250px;
+    max-height: 250px;
+}

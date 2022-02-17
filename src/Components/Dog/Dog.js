@@ -4,8 +4,9 @@ The card keeps calling the api to update the card details randomly
 
  */
 import {useState,useEffect} from 'react';
-import { Card } from 'antd';
-const { Meta } = Card;
+import { Image } from 'antd';
+import './Dog.css'
+
 
 async function getImage(link){
 
@@ -34,17 +35,24 @@ function Dog(props){
 
         getImageLink()
 
-    })
+    },[])
 
     
     return(
+
+        <>
+        <div className='dog-card'>
+            <Image src={imageLink} alt={props.name} preview = {false} className='image'/>
+            <h3>{props.name}</h3>
+        </div>        
+        </>
         
-        <Card
-        hoverable
-        style={{ width: 'fit-content(20%)' }}
-        cover={<img alt={props.name} src={imageLink} />}>
-        <Meta title={props.name} />
-      </Card>
+    //     <Card
+    //     hoverable
+    //     style={{ width: 'fit-content(20%)' }}
+    //     cover={<img alt={props.name} src={imageLink} />}>
+    //     <Meta title={props.name} />
+    //   </Card>
     )
 
 }

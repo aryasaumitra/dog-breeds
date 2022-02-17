@@ -43,7 +43,8 @@ function generateDogList(data){
         if(data[key].length === 0){
             dogObject = {
                 'name': String(key.charAt(0).toUpperCase()+ key.slice(1)),
-                'link': String(key)
+                'link': String(key),
+                'searchName':String(key)
             }
 
             dogNameList.push(dogObject)
@@ -52,7 +53,8 @@ function generateDogList(data){
             data[key].forEach(breed =>{
                 dogObject = {
                     'name':String(breed.charAt(0).toUpperCase() + breed.slice(1) + " " + key.charAt(0).toUpperCase()+ key.slice(1)),
-                    'link':String(key + "/" + breed)
+                    'link':String(key + "/" + breed),
+                    'searchName':String(breed+" "+key)
                 }
                 dogNameList.push(dogObject)
             })
@@ -66,7 +68,18 @@ function generateDogList(data){
     
 }
 
-function filterDogList(){
+function filterDogList(e,dogList){
+
+    const inputValue = e.target.value.toLowerCase();
+
+    console.log(`E:${e.target.value.toLowerCase()}`)
+
+    const filteredDogData=dogList.filter((dog)=>{
+
+        return dog.searchName.toLowerCase().startsWith(inputValue);
+    })
+
+    return filteredDogData
 
 }
 
@@ -74,7 +87,7 @@ function filterDogList(){
 function MainComponent(){
 
     const [allDogList,setDogList] = useState(null);
-    const [chosenDogList,setChosenDogList] = useState([]); 
+    const [chosenDogList,setChosenDogList] = useState(null); 
 
     useEffect(()=>{
         async function setData(){
@@ -89,10 +102,10 @@ function MainComponent(){
 
     return <>
         <div className='main'>
-            <Input placeholder='Search' className='search-box'/><br/>
+            <Input placeholder='Search' className='search-box' onChange={(e)=>{setChosenDogList(filterDogList(e,allDogList))}}/><br/>
 
 
-            <DogList dogData = {allDogList} size ={'large'}/>
+            <DogList dogData = {chosenDogList} size ={'large'}/>
 
         </div>
 
